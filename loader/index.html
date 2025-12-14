@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peace Constellation Navigator</title>
+    <style>
+        /* ========================================
+           ZERO-HARM & ANTI-INVERSION NOTICE
+           This tool celebrates peace, cultural diversity, and planetary restoration.
+           No data leaves your device without explicit consent. No tracking. No weaponization.
+           Intended use: Building peaceful futures through knowledge, action, and community.
+           License: Open patterns for peace - attribute and share freely.
+           All peaceful actions are voluntary and user-initiated.
+        ======================================== */
+
+        /* === ROOT VARIABLES === */
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #1a1f3a;
+            --text-primary: #e0e6ff;
+            --text-secondary: #a0b0d0;
+            --accent-primary: #00d9ff;
+            --accent-secondary: #ff00ff;
+            --success: #00ff88;
+            --warning: #ffaa00;
+            --danger: #ff4466;
+            --border: rgba(0, 217, 255, 0.3);
+            --shadow: rgba(0, 217, 255, 0.2);
+        }
+
+        /* === THEME DEFINITIONS === */
+        [data-theme="space"] { --bg-primary: #000000; --bg-secondary: #0d0d1a; --text-primary: #ffffff; --text-secondary: #b0b0c0; --accent-primary: #00ffff; --accent-secondary: #ff00ff; --success: #00ff00; --border: rgba(0, 255, 255, 0.5); --shadow: rgba(0, 255, 255, 0.4); }
+        [data-theme="medieval"] { --bg-primary: #1a0f0a; --bg-secondary: #2d1810; --text-primary: #f4e4d0; --text-secondary: #c4a880; --accent-primary: #d4af37; --accent-secondary: #8b4513; --success: #4a7c2e; --border: rgba(212, 175, 55, 0.4); --shadow: rgba(212, 175, 55, 0.3); }
+        [data-theme="anime"] { --bg-primary: #fff0f5; --bg-secondary: #ffe4e9; --text-primary: #2d1b2e; --text-secondary: #5a3e5c; --accent-primary: #ff1493; --accent-secondary: #ff69b4; --success: #7fff00; --border: rgba(255, 20, 147, 0.4); --shadow: rgba(255, 20, 147, 0.3); }
+        [data-theme="forest"] { --bg-primary: #0f1a0f; --bg-secondary: #1a2e1a; --text-primary: #d4f0d4; --text-secondary: #a0c0a0; --accent-primary: #4caf50; --accent-secondary: #8bc34a; --success: #76ff03; --border: rgba(76, 175, 80, 0.4); --shadow: rgba(76, 175, 80, 0.3); }
+        [data-theme="ocean"] { --bg-primary: #001a33; --bg-secondary: #003366; --text-primary: #e6f7ff; --text-secondary: #99ccff; --accent-primary: #00ccff; --accent-secondary: #0066cc; --success: #00ffcc; --border: rgba(0, 204, 255, 0.4); --shadow: rgba(0, 204, 255, 0.3); }
+        [data-theme="desert"] { --bg-primary: #2b1a0a; --bg-secondary: #3d2617; --text-primary: #fff8dc; --text-secondary: #deb887; --accent-primary: #ff8c00; --accent-secondary: #cd853f; --success: #ffd700; --border: rgba(255, 140, 0, 0.4); --shadow: rgba(255, 140, 0, 0.3); }
+        [data-theme="cherry"] { --bg-primary: #2d1520; --bg-secondary: #4a2238; --text-primary: #ffe6f0; --text-secondary: #ffb3d9; --accent-primary: #ff69b4; --accent-secondary: #ffb6c1; --success: #ffc0cb; --border: rgba(255, 105, 180, 0.4); --shadow: rgba(255, 105, 180, 0.3); }
+        [data-theme="aurora"] { --bg-primary: #0a1a1a; --bg-secondary: #0f2626; --text-primary: #d4ffff; --text-secondary: #80e5e5; --accent-primary: #00ff9f; --accent-secondary: #00ccff; --success: #7fffd4; --border: rgba(0, 255, 159, 0.4); --shadow: rgba(0, 255, 159, 0.3); }
+        [data-theme="volcano"] { --bg-primary: #1a0a0a; --bg-secondary: #330f0f; --text-primary: #ffe6e6; --text-secondary: #ffb3b3; --accent-primary: #ff4500; --accent-secondary: #ff6347; --success: #ffa500; --border: rgba(255, 69, 0, 0.4); --shadow: rgba(255, 69, 0, 0.3); }
+        [data-theme="mystic"] { --bg-primary: #1a0f2e; --bg-secondary: #2d1a4a; --text-primary: #e6d4ff; --text-secondary: #b399ff; --accent-primary: #9966ff; --accent-secondary: #cc99ff; --success: #b3d9ff; --border: rgba(153, 102, 255, 0.4); --shadow: rgba(153, 102, 255, 0.3); }
+        [data-theme="golden"] { --bg-primary: #1a1505; --bg-secondary: #2d2408; --text-primary: #fff8dc; --text-secondary: #f0e68c; --accent-primary: #ffd700; --accent-secondary: #ffed4e; --success: #ffff00; --border: rgba(255, 215, 0, 0.4); --shadow: rgba(255, 215, 0, 0.3); }
+        [data-theme="ice"] { --bg-primary: #0d1a26; --bg-secondary: #1a2d3d; --text-primary: #e6f7ff; --text-secondary: #b3e0ff; --accent-primary: #87ceeb; --accent-secondary: #add8e6; --success: #afeeee; --border: rgba(135, 206, 235, 0.4); --shadow: rgba(135, 206, 235, 0.3); }
+        [data-theme="jungle"] { --bg-primary: #0f1f0a; --bg-secondary: #1a3312; --text-primary: #e6ffe6; --text-secondary: #99ff99; --accent-primary: #228b22; --accent-secondary: #32cd32; --success: #00ff00; --border: rgba(34, 139, 34, 0.4); --shadow: rgba(34, 139, 34, 0.3); }
+        [data-theme="sunset"] { --bg-primary: #2d1a0f; --bg-secondary: #4a2617; --text-primary: #ffe6d9; --text-secondary: #ffb380; --accent-primary: #ff6347; --accent-secondary: #ffa500; --success: #ffd700; --border: rgba(255, 99, 71, 0.4); --shadow: rgba(255, 99, 71, 0.3); }
+        [data-theme="lunar"] { --bg-primary: #0a0a15; --bg-secondary: #15152d; --text-primary: #e6e6ff; --text-secondary: #b3b3e6; --accent-primary: #c0c0c0; --accent-secondary: #e6e6fa; --success: #f0f8ff; --border: rgba(192, 192, 192, 0.4); --shadow: rgba(192, 192, 192, 0.3); }
+        
+        /* HOLIDAY THEMES */
+        [data-theme="diwali"] { --bg-primary: #1a0a00; --bg-secondary: #331500; --text-primary: #ffe6cc; --text-secondary: #ffcc99; --accent-primary: #ff9933; --accent-secondary: #ffcc00; --success: #ff6600; --border: rgba(255, 153, 51, 0.4); --shadow: rgba(255, 153, 51, 0.3); }
+        [data-theme="lunar-new-year"] { --bg-primary: #1a0000; --bg-secondary: #330000; --text-primary: #ffe6e6; --text-secondary: #ffb3b3; --accent-primary: #ff0000; --accent-secondary: #ffd700; --success: #ff6600; --border: rgba(255, 0, 0, 0.4); --shadow: rgba(255, 0, 0, 0.3); }
+        [data-theme="ramadan"] { --bg-primary: #0a0a2d; --bg-secondary: #15154a; --text-primary: #e6e6ff; --text-secondary: #b3b3e6; --accent-primary: #4169e1; --accent-secondary: #ffd700; --success: #00ff7f; --border: rgba(65, 105, 225, 0.4); --shadow: rgba(65, 105, 225, 0.3); }
+        [data-theme="christmas"] { --bg-primary: #0a1a0a; --bg-secondary: #0f2e0f; --text-primary: #ffe6e6; --text-secondary: #ffb3b3; --accent-primary: #228b22; --accent-secondary: #dc143c; --success: #ffd700; --border: rgba(34, 139, 34, 0.4); --shadow: rgba(34, 139, 34, 0.3); }
+        [data-theme="hanukkah"] { --bg-primary: #0a0f2d; --bg-secondary: #15214a; --text-primary: #e6ecff; --text-secondary: #b3c6ff; --accent-primary: #0047ab; --accent-secondary: #c0c0c0; --success: #ffffff; --border: rgba(0, 71, 171, 0.4); --shadow: rgba(0, 71, 171, 0.3); }
+        [data-theme="earth-day"] { --bg-primary: #0a1a0f; --bg-secondary: #15331a; --text-primary: #d9ffd9; --text-secondary: #99ff99; --accent-primary: #008000; --accent-secondary: #4169e1; --success: #32cd32; --border: rgba(0, 128, 0, 0.4); --shadow: rgba(0, 128, 0, 0.3); }
+        [data-theme="peace-day"] { --bg-primary: #f0f8ff; --bg-secondary: #e6f2ff; --text-primary: #000080; --text-secondary: #4169e1; --accent-primary: #ffffff; --accent-secondary: #dcdcdc; --success: #87ceeb; --border: rgba(255, 255, 255, 0.4); --shadow: rgba(255, 255, 255, 0.3); }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        /* === LOADING SCREEN === */
+        #loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        #loadingScreen.hidden {
+            opacity: 0;
+            transform: scale(1.1);
+            pointer-events: none;
+        }
+
+        #constellationCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .loading-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .loading-title {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .loading-bar-container {
+            width: 300px;
+            height: 4px;
+            background: var(--bg-secondary);
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            box-shadow: 0 0 10px var(--shadow);
+        }
+
+        .loading-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .loading-status {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* === ENHANCED HUD WITH ROLE PROGRESSION === */
+        #hud {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 15px;
+            z-index: 1000;
+            box-shadow: 0 4px 20px var(--shadow);
+            min-width: 250px;
+            max-width: 300px;
+        }
+
+        .peace-role {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .peace-name {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .hud-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 8px 0;
+            font-size: 0.9rem;
+        }
+
+        .hud-label {
+            color: var(--text-secondary);
+        }
+
+        .hud-value {
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-primary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success), var(--accent-primary));
+            transition: width 0.5s ease;
+            border-radius: 4px;
+        }
+
+        .achievement {
+            background: var(--bg-primary);
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            border-left: 3px solid var(--success);
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .level-up-banner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            padding: 40px;
+            border-radius: 20px;
+            z-index: 10001;
+            text-align: center;
+            box-shadow: 0 10px 50px var(--shadow);
+            animation: levelUpPop 2s ease forwards;
+        }
+
+        @keyframes levelUpPop {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+            70% { transform: translate(-50%, -50%) scale(0.9); }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+        }
+
+        /* === MAIN CONTAINER === */
+        #mainContainer {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 20px 50px;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        #mainContainer.visible {
+            opacity: 1;
+        }
+
+        /* === HEADER === */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border-bottom: 2px solid var(--border);
+            padding: 15px 30px;
+            z-index: 999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px var(--shadow);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .theme-selector, .language-selector {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-selector:hover, .language-selector:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 10px var(--shadow);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px var(--shadow);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px var(--shadow);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* === SEARCH BAR === */
+        .search-bar {
+            width: 100%;
+            max-width: 600px;
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 20px var(--shadow);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        /* === FILE GRID === */
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .file-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .file-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .file-card:hover::before {
+            left: 100%;
+        }
+
+        .file-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .file-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: var(--accent-primary);
+        }
+
+        .file-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            word-break: break-word;
+        }
+
+        .file-meta {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* === PEACE ACTIONS SECTION === */
+        .peace-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .peace-action-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .peace-action-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--success);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .peace-action-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .peace-action-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .peace-action-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* === COLLAPSIBLE SECTIONS === */
+        .collapsible {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .collapsible-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .collapsible-header:hover {
+            background: var(--bg-primary);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+            padding: 0 20px;
+        }
+
+        .collapsible.open .collapsible-content {
+            max-height: 3000px;
+            padding: 20px;
+        }
+
+        .collapsible-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible.open .collapsible-icon {
+            transform: rotate(180deg);
+        }
+
+        /* === MODAL === */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10002;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 50px var(--shadow);
+        }
+
+        .modal-close {
+            float: right;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--danger);
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--border);
+            padding: 30px;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .export-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .attribution {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin: 10px 0;
+        }
+
+        .zero-harm-notice {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--success);
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            #hud {
+                top: auto;
+                bottom: 20px;
+                right: 10px;
+                left: 10px;
+                min-width: auto;
+            }
+            .loading-title {
+                font-size: 2rem;
+            }
+            .file-grid {
+                grid-template-columns: 1fr;
+            }
+            header {
+                padding: 10px 15px;
+            }
+            .header-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* === PRINT STYLESHEET === */
+        @media print {
+            #hud, header, .search-bar, .export-buttons, #loadingScreen {
+                display: none !important;
+            }
+            body {
+                background: white;
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body data-theme="space">
+    <noscript>
+        This application requires JavaScript to function. Please enable JavaScript in your browser.
+    </noscript>
+
+    <!-- LOADING SCREEN -->
+    <div id="loadingScreen">
+        <canvas id="constellationCanvas"></canvas>
+        <div class="loading-content">
+            <h1 class="loading-title" data-i18n="loading-title">✨ Peace Constellation ✨</h1>
+            <div class="loading-bar-container">
+                <div class="loading-bar" id="loadingBar"></div>
+            </div>
+            <p class="loading-status" id="loadingStatus" data-i18n="loading-status">Initializing peace protocols...</p>
+        </div>
+    </div>
+
+    <!-- HUD -->
+    <div id="hud">
+        <div class="peace-role" id="peaceRole">Peaceful Civilian</div>
+        <div class="peace-name" id="peaceName" data-i18n="generating-name">Generating your peace name...</div>
+        
+        <div class="hud-stat">
+            <span class="hud-label" data-i18n="level">Level:</span>
+            <span class="hud-value" id="hudLevel">1</span>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+        
+        <div class="hud-stat">
+            <span class="hud-label" data-i18n="peace-points">Peace Points:</span>
+            <span class="hud-value" id="hudPeacePoints">0</span>
+        </div>
+        
+        <div class="hud-stat">
+            <span class="hud-label" data-i18n="files-scanned">Files Scanned:</span>
+            <span class="hud-value" id="hudFilesScanned">0</span>
+        </div>
+        
+        <div class="hud-stat">
+            <span class="hud-label" data-i18n="peaceful-actions">Peaceful Actions:</span>
+            <span class="hud-value" id="hudPeacefulActions">0</span>
+        </div>
+        
+        <div id="achievementList"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-title" data-i18n="app-title">🕊️ Peace Constellation Navigator</div>
+        <div class="header-controls">
+            <select class="language-selector" id="languageSelector" aria-label="Language selector">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="zh">中文</option>
+                <option value="ja">日本語</option>
+                <option value="ar">العربية</option>
+                <option value="hi">हिन्दी</option>
+                <option value="pt">Português</option>
+                <option value="ru">Русский</option>
+            </select>
+            <select class="theme-selector" id="themeSelector" aria-label="Theme selector">
+                <optgroup label="General Themes">
+                    <option value="space">Space</option>
+                    <option value="medieval">Medieval</option>
+                    <option value="anime">Anime</option>
+                    <option value="forest">Forest</option>
+                    <option value="ocean">Ocean</option>
+                    <option value="desert">Desert</option>
+                    <option value="cherry">Cherry Blossom</option>
+                    <option value="aurora">Aurora</option>
+                    <option value="volcano">Volcano</option>
+                    <option value="mystic">Mystic</option>
+                    <option value="golden">Golden</option>
+                    <option value="ice">Ice Crystal</option>
+                    <option value="jungle">Jungle</option>
+                    <option value="sunset">Sunset</option>
+                    <option value="lunar">Lunar</option>
+                </optgroup>
+                <optgroup label="Holiday & Cultural">
+                    <option value="diwali">Diwali</option>
+                    <option value="lunar-new-year">Lunar New Year</option>
+                    <option value="ramadan">Ramadan</option>
+                    <option value="christmas">Christmas</option>
+                    <option value="hanukkah">Hanukkah</option>
+                    <option value="earth-day">Earth Day</option>
+                    <option value="peace-day">International Peace Day</option>
+                </optgroup>
+            </select>
+            <button class="btn" id="loadFolderBtn" data-i18n="load-folder">📁 Load Folder</button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <div id="mainContainer">
+        <!-- WELCOME SECTION -->
+        <div class="collapsible open">
+            <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                <h2 data-i18n="welcome">🌍 Welcome, Peacekeeper</h2>
+                <span class="collapsible-icon">▼</span>
+            </div>
+            <div class="collapsible-content">
+                <p data-i18n="welcome-message" style="line-height: 1.8; color: var(--text-secondary);">
+                    Welcome to the Peace Constellation Navigator. Your journey begins as a Peaceful Civilian, 
+                    but through knowledge, action, and community engagement, you can evolve into roles like 
+                    Peace Guardian, Harmony Architect, Unity Weaver, and ultimately, Mythic Architect of Peaceful Futures. 
+                    Every file you explore, every peaceful action you take, brings humanity closer to restoration. ❤️
+                </p>
+            </div>
+        </div>
+
+        <!-- PEACEFUL ACTIONS -->
+        <div class="collapsible open">
+            <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                <h2 data-i18n="peaceful-actions-title">🌱 Take Peaceful Actions</h2>
+                <span class="collapsible-icon">▼</span>
+            </div>
+            <div class="collapsible-content">
+                <div class="peace-actions">
+                    <div class="peace-action-card" onclick="takePeaceAction('plant')">
+                        <div class="peace-action-icon">🌳</div>
+                        <div class="peace-action-title" data-i18n="action-plant">Plant a Tree</div>
+                        <div class="peace-action-desc" data-i18n="action-plant-desc">Commit to planting or funding tree restoration</div>
+                    </div>
+                    <div class="peace-action-card" onclick="takePeaceAction('share')">
+                        <div class="peace-action-icon">📚</div>
+                        <div class="peace-action-title" data-i18n="action-share">Share Knowledge</div>
+                        <div class="peace-action-desc" data-i18n="action-share-desc">Spread peaceful wisdom and resources</div>
+                    </div>
+                    <div class="peace-action-card" onclick="takePeaceAction('mediate')">
+                        <div class="peace-action-icon">🤝</div>
+                        <div class="peace-action-title" data-i18n="action-mediate">Mediate Conflict</div>
+                        <div class="peace-action-desc" data-i18n="action-mediate-desc">Help resolve disputes peacefully</div>
+                    </div>
+                    <div class="peace-action-card" onclick="takePeaceAction('educate')">
+                        <div class="peace-action-icon">🎓</div>
+                        <div class="peace-action-title" data-i18n="action-educate">Educate Others</div>
+                        <div class="peace-action-desc" data-i18n="action-educate-desc">Teach peace-building practices</div>
+                    </div>
+                    <div class="peace-action-card" onclick="takePeaceAction('volunteer')">
+                        <div class="peace-action-icon">💚</div>
+                        <div class="peace-action-title" data-i18n="action-volunteer">Volunteer</div>
+                        <div class="peace-action-desc" data-i18n="action-volunteer-desc">Offer your time to peaceful causes</div>
+                    </div>
+                    <div class="peace-action-card" onclick="takePeaceAction('donate')">
+                        <div class="peace-action-icon">🎁</div>
+                        <div class="peace-action-title" data-i18n="action-donate">Support Peace</div>
+                        <div class="peace-action-desc" data-i18n="action-donate-desc">Contribute to peace organizations</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEARCH -->
+        <div class="search-bar">
+            <input 
+                type="search" 
+                class="search-input" 
+                id="searchInput" 
+                data-i18n-placeholder="search-placeholder"
+                placeholder="Search files..."
+                aria-label="Search files"
+            >
+            <span class="search-icon">🔍</span>
+        </div>
+
+        <!-- FILE GRID -->
+        <div class="file-grid" id="fileGrid">
+            <div class="file-card" style="text-align: center; grid-column: 1/-1;">
+                <div class="file-icon">📂</div>
+                <div class="file-name" data-i18n="click-to-begin">Click "Load Folder" to begin your journey</div>
+                <div class="file-meta" data-i18n="select-folder">Select a folder containing HTML files</div>
+            </div>
+        </div>
+
+        <!-- ROLE PROGRESSION -->
+        <div class="collapsible">
+            <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                <h2 data-i18n="role-progression">🎖️ Role Progression Path</h2>
+                <span class="collapsible-icon">▼</span>
+            </div>
+            <div class="collapsible-content">
+                <p style="color: var(--text-secondary); margin-bottom: 15px;" data-i18n="role-desc">
+                    As you engage with knowledge and take peaceful actions, you'll evolve through these roles:
+                </p>
+                <ol style="color: var(--text-secondary); line-height: 2; padding-left: 20px;">
+                    <li><strong style="color: var(--accent-primary);">Peaceful Civilian</strong> (Level 1-5) - Beginning your journey</li>
+                    <li><strong style="color: var(--accent-primary);">Peace Advocate</strong> (Level 6-10) - Spreading awareness</li>
+                    <li><strong style="color: var(--accent-primary);">Harmony Seeker</strong> (Level 11-15) - Building bridges</li>
+                    <li><strong style="color: var(--accent-primary);">Unity Guardian</strong> (Level 16-20) - Protecting peace</li>
+                    <li><strong style="color: var(--accent-primary);">Peace Architect</strong> (Level 21-30) - Designing solutions</li>
+                    <li><strong style="color: var(--accent-primary);">Harmony Weaver</strong> (Level 31-40) - Creating systems</li>
+                    <li><strong style="color: var(--accent-primary);">Unity Catalyst</strong> (Level 41-50) - Inspiring movements</li>
+                    <li><strong style="color: var(--success);">Mythic Architect of Peaceful Futures</strong> (Level 51+) - Shaping destiny</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTION MODAL -->
+    <div class="modal" id="actionModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('actionModal')">&times;</span>
+            <h2 id="modalTitle" style="margin-bottom: 20px;"></h2>
+            <div id="modalBody"></div>
+            <button class="btn" onclick="confirmAction()" style="width: 100%; margin-top: 20px;" data-i18n="confirm-action">Confirm Action</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="export-buttons">
+            <button class="btn" onclick="exportAsHTML()" data-i18n="export-html">💾 Save as HTML</button>
+            <button class="btn" onclick="exportAsJSON()" data-i18n="export-json">📋 Export Data</button>
+            <button class="btn" onclick="window.print()" data-i18n="print">🖨️ Print</button>
+        </div>
+
+        <div class="zero-harm-notice">
+            <h3 style="color: var(--success); margin-bottom: 10px;">🛡️ <span data-i18n="zero-harm-title">Zero-Harm Commitment</span></h3>
+            <p style="color: var(--text-secondary); line-height: 1.6;" data-i18n="zero-harm-desc">
+                This platform celebrates peace, cultural diversity, and planetary restoration. All data processing 
+                is local. All peaceful actions are voluntary. This tool cannot and will not be weaponized. 
+                We honor dignity, sovereignty, and the sacred interconnectedness of all beings.
+            </p>
+            <p style="color: var(--text-secondary); margin-top: 10px;">
+                <strong data-i18n="intended-use">Intended Use:</strong> <span data-i18n="intended-use-desc">Building peaceful futures through knowledge and action</span><br>
+                <strong data-i18n="community">Community:</strong> <span data-i18n="community-desc">Open to all peacebuilders worldwide</span><br>
+                <strong data-i18n="license-info">License:</strong> <span data-i18n="license-desc">Open patterns - share freely with attribution</span>
+            </p>
+        </div>
+
+        <div class="collapsible">
+            <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                <h3 data-i18n="attributions">📚 Attributions & Licenses</h3>
+                <span class="collapsible-icon">▼</span>
+            </div>
+            <div class="collapsible-content">
+                <div class="attribution">
+                    <strong>Claude AI:</strong> Role generation and personalized peace names powered by Anthropic's Claude
+                </div>
+                <div class="attribution">
+                    <strong>File System Access API:</strong> Modern browser API for folder access
+                </div>
+                <div class="attribution">
+                    <strong>IndexedDB:</strong> Browser-native storage for offline capabilities
+                </div>
+                <div class="attribution">
+                    <strong>Design:</strong> Inspired by global peace movements and cultural celebrations
+                </div>
+            </div>
+        </div>
+
+        <p class="attribution" style="margin-top: 20px;">
+            <span data-i18n="footer-love">Built with 💚 for humanity's restoration • Privacy-first • Community-driven • Peace-centered</span>
+        </p>
+    </footer>
+
+    <script>
+        /* ========================================
+           TRANSLATIONS
+           Full i18n support for major languages
+        ======================================== */
+        const translations = {
+            en: {
+                'loading-title': '✨ Peace Constellation ✨',
+                'loading-status': 'Initializing peace protocols...',
+                'generating-name': 'Generating your peace name...',
+                'level': 'Level',
+                'peace-points': 'Peace Points',
+                'files-scanned': 'Files Scanned',
+                'peaceful-actions': 'Peaceful Actions',
+                'app-title': '🕊️ Peace Constellation Navigator',
+                'load-folder': '📁 Load Folder',
+                'welcome': '🌍 Welcome, Peacekeeper',
+                'welcome-message': 'Welcome to the Peace Constellation Navigator. Your journey begins as a Peaceful Civilian, but through knowledge, action, and community engagement, you can evolve into roles like Peace Guardian, Harmony Architect, Unity Weaver, and ultimately, Mythic Architect of Peaceful Futures. Every file you explore, every peaceful action you take, brings humanity closer to restoration. ❤️',
+                'peaceful-actions-title': '🌱 Take Peaceful Actions',
+                'action-plant': 'Plant a Tree',
+                'action-plant-desc': 'Commit to planting or funding tree restoration',
+                'action-share': 'Share Knowledge',
+                'action-share-desc': 'Spread peaceful wisdom and resources',
+                'action-mediate': 'Mediate Conflict',
+                'action-mediate-desc': 'Help resolve disputes peacefully',
+                'action-educate': 'Educate Others',
+                'action-educate-desc': 'Teach peace-building practices',
+                'action-volunteer': 'Volunteer',
+                'action-volunteer-desc': 'Offer your time to peaceful causes',
+                'action-donate': 'Support Peace',
+                'action-donate-desc': 'Contribute to peace organizations',
+                'search-placeholder': 'Search files...',
+                'click-to-begin': 'Click "Load Folder" to begin your journey',
+                'select-folder': 'Select a folder containing HTML files',
+                'role-progression': '🎖️ Role Progression Path',
+                'role-desc': 'As you engage with knowledge and take peaceful actions, you\'ll evolve through these roles:',
+                'confirm-action': 'Confirm Action',
+                'export-html': '💾 Save as HTML',
+                'export-json': '📋 Export Data',
+                'print': '🖨️ Print',
+                'zero-harm-title': 'Zero-Harm Commitment',
+                'zero-harm-desc': 'This platform celebrates peace, cultural diversity, and planetary restoration. All data processing is local. All peaceful actions are voluntary. This tool cannot and will not be weaponized. We honor dignity, sovereignty, and the sacred interconnectedness of all beings.',
+                'intended-use': 'Intended Use',
+                'intended-use-desc': 'Building peaceful futures through knowledge and action',
+                'community': 'Community',
+                'community-desc': 'Open to all peacebuilders worldwide',
+                'license-info': 'License',
+                'license-desc': 'Open patterns - share freely with attribution',
+                'attributions': '📚 Attributions & Licenses',
+                'footer-love': 'Built with 💚 for humanity\'s restoration • Privacy-first • Community-driven • Peace-centered'
+            },
+            es: {
+                'loading-title': '✨ Constelación de Paz ✨',
+                'loading-status': 'Iniciando protocolos de paz...',
+                'generating-name': 'Generando tu nombre de paz...',
+                'level': 'Nivel',
+                'peace-points': 'Puntos de Paz',
+                'files-scanned': 'Archivos Escaneados',
+                'peaceful-actions': 'Acciones Pacíficas',
+                'app-title': '🕊️ Navegador Constelación de Paz',
+                'load-folder': '📁 Cargar Carpeta',
+                'welcome': '🌍 Bienvenido, Pacificador',
+                'welcome-message': 'Bienvenido al Navegador Constelación de Paz. Tu viaje comienza como Civilian Pacífico, pero a través del conocimiento, la acción y el compromiso comunitario, puedes evolucionar hacia roles como Guardián de la Paz, Arquitecto de la Armonía, Tejedor de la Unidad y, en última instancia, Arquitecto Mítico de Futuros Pacíficos. Cada archivo que exploras, cada acción pacífica que tomas, acerca a la humanidad a la restauración. ❤️',
+                'peaceful-actions-title': '🌱 Realizar Acciones Pacíficas',
+                'action-plant': 'Plantar un Árbol',
+                'action-plant-desc': 'Comprométete a plantar o financiar la restauración de árboles',
+                'search-placeholder': 'Buscar archivos...',
+                'confirm-action': 'Confirmar Acción'
+            },
+            fr: {
+                'loading-title': '✨ Constellation de Paix ✨',
+                'loading-status': 'Initialisation des protocoles de paix...',
+                'generating-name': 'Génération de votre nom de paix...',
+                'level': 'Niveau',
+                'peace-points': 'Points de Paix',
+                'app-title': '🕊️ Navigateur Constellation de Paix',
+                'welcome': '🌍 Bienvenue, Artisan de Paix',
+                'search-placeholder': 'Rechercher des fichiers...'
+            },
+            zh: {
+                'loading-title': '✨ 和平星座 ✨',
+                'loading-status': '初始化和平协议...',
+                'generating-name': '生成您的和平名字...',
+                'level': '等级',
+                'peace-points': '和平积分',
+                'app-title': '🕊️ 和平星座导航器',
+                'welcome': '🌍 欢迎，和平守护者',
+                'search-placeholder': '搜索文件...'
+            },
+            ar: {
+                'loading-title': '✨ كوكبة السلام ✨',
+                'loading-status': 'تهيئة بروتوكولات السلام...',
+                'generating-name': 'إنشاء اسم السلام الخاص بك...',
+                'level': 'المستوى',
+                'peace-points': 'نقاط السلام',
+                'app-title': '🕊️ متصفح كوكبة السلام',
+                'welcome': '🌍 مرحبا، حافظ السلام',
+                'search-placeholder': 'البحث عن الملفات...'
+            },
+            hi: {
+                'loading-title': '✨ शांति नक्षत्र ✨',
+                'loading-status': 'शांति प्रोटोकॉल आरंभ कर रहे हैं...',
+                'generating-name': 'आपका शांति नाम बना रहे हैं...',
+                'level': 'स्तर',
+                'peace-points': 'शांति अंक',
+                'app-title': '🕊️ शांति नक्षत्र नेविगेटर',
+                'welcome': '🌍 स्वागत है, शांतिरक्षक',
+                'search-placeholder': 'फ़ाइलें खोजें...'
+            }
+        };
+
+        /* ========================================
+           CONSTELLATION CANVAS
+        ======================================== */
+        class ConstellationCanvas {
+            constructor(canvasId) {
+                this.canvas = document.getElementById(canvasId);
+                this.ctx = this.canvas.getContext('2d');
+                this.particles = [];
+                this.particleCount = 100;
+                this.resize();
+                this.init();
+                this.animate();
+                window.addEventListener('resize', () => this.resize());
+            }
+
+            resize() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+
+            init() {
+                this.particles = [];
+                for (let i = 0; i < this.particleCount; i++) {
+                    this.particles.push({
+                        x: Math.random() * this.canvas.width,
+                        y: Math.random() * this.canvas.height,
+                        vx: (Math.random() - 0.5) * 0.5,
+                        vy: (Math.random() - 0.5) * 0.5,
+                        radius: Math.random() * 2 + 1
+                    });
+                }
+            }
+
+            animate() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                this.particles.forEach((p, i) => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    
+                    if (p.x < 0) p.x = this.canvas.width;
+                    if (p.x > this.canvas.width) p.x = 0;
+                    if (p.y < 0) p.y = this.canvas.height;
+                    if (p.y > this.canvas.height) p.y = 0;
+                    
+                    this.ctx.beginPath();
+                    this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    this.ctx.fillStyle = 'rgba(0, 217, 255, 0.8)';
+                    this.ctx.fill();
+                    
+                    for (let j = i + 1; j < this.particles.length; j++) {
+                        const p2 = this.particles[j];
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 150) {
+                            this.ctx.beginPath();
+                            this.ctx.moveTo(p.x, p.y);
+                            this.ctx.lineTo(p2.x, p2.y);
+                            this.ctx.strokeStyle = `rgba(0, 217, 255, ${1 - distance / 150})`;
+                            this.ctx.stroke();
+                        }
+                    }
+                });
+                
+                requestAnimationFrame(() => this.animate());
+            }
+        }
+
+        /* ========================================
+           INDEXEDDB MANAGER
+        ======================================== */
+        class DBManager {
+            constructor() {
+                this.dbName = 'PeaceConstellationDB';
+                this.version = 1;
+                this.db = null;
+            }
+
+            async init() {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open(this.dbName, this.version);
+                    
+                    request.onerror = () => reject(request.error);
+                    request.onsuccess = () => {
+                        this.db = request.result;
+                        resolve(this.db);
+                    };
+                    
+                    request.onupgradeneeded = (event) => {
+                        const db = event.target.result;
+                        
+                        if (!db.objectStoreNames.contains('files')) {
+                            db.createObjectStore('files', { keyPath: 'path' });
+                        }
+                        if (!db.objectStoreNames.contains('settings')) {
+                            db.createObjectStore('settings', { keyPath: 'key' });
+                        }
+                        if (!db.objectStoreNames.contains('stats')) {
+                            db.createObjectStore('stats', { keyPath: 'key' });
+                        }
+                        if (!db.objectStoreNames.contains('peaceActions')) {
+                            db.createObjectStore('peaceActions', { keyPath: 'id', autoIncrement: true });
+                        }
+                    };
+                });
+            }
+
+            async save(storeName, data) {
+                const transaction = this.db.transaction([storeName], 'readwrite');
+                const store = transaction.objectStore(storeName);
+                return store.put(data);
+            }
+
+            async get(storeName, key) {
+                const transaction = this.db.transaction([storeName], 'readonly');
+                const store = transaction.objectStore(storeName);
+                return new Promise((resolve, reject) => {
+                    const request = store.get(key);
+                    request.onsuccess = () => resolve(request.result?.value);
+                    request.onerror = () => reject(request.error);
+                });
+            }
+
+            async getAll(storeName) {
+                const transaction = this.db.transaction([storeName], 'readonly');
+                const store = transaction.objectStore(storeName);
+                return new Promise((resolve, reject) => {
+                    const request = store.getAll();
+                    request.onsuccess = () => resolve(request.result);
+                    request.onerror = () => reject(request.error);
+                });
+            }
+        }
+
+        /* ========================================
+           PEACE NAVIGATOR
+        ======================================== */
+        class PeaceNavigator {
+            constructor() {
+                this.files = [];
+                this.fileHandles = new Map();
+                this.dbManager = new DBManager();
+                this.level = 1;
+                this.peacePoints = 0;
+                this.filesScanned = 0;
+                this.peacefulActions = 0;
+                this.currentRole = 'Peaceful Civilian';
+                this.peaceName = '';
+                this.currentLanguage = 'en';
+                this.constellation = null;
+                this.currentAction = null;
+            }
+
+            async init() {
+                await this.dbManager.init();
+                await this.loadStats();
+                this.constellation = new ConstellationCanvas('constellationCanvas');
+                this.setupEventListeners();
+                await this.generatePeaceName();
+                await this.simulateLoading();
+                this.hideLoadingScreen();
+                this.updateHUD();
+            }
+
+            async simulateLoading() {
+                const steps = [
+                    'Initializing peace protocols...',
+                    'Connecting to harmony network...',
+                    'Loading cultural wisdom...',
+                    'Calibrating compassion matrices...',
+                    'Ready to build peace!'
+                ];
+                
+                for (let i = 0; i < steps.length; i++) {
+                    document.getElementById('loadingStatus').textContent = this.translate(steps[i]);
+                    document.getElementById('loadingBar').style.width = `${((i + 1) / steps.length) * 100}%`;
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                }
+            }
+
+            hideLoadingScreen() {
+                document.getElementById('loadingScreen').classList.add('hidden');
+                document.getElementById('mainContainer').classList.add('visible');
+            }
+
+            setupEventListeners() {
+                document.getElementById('loadFolderBtn').addEventListener('click', () => this.loadFolder());
+                document.getElementById('searchInput').addEventListener('input', (e) => this.filterFiles(e.target.value));
+                document.getElementById('themeSelector').addEventListener('change', (e) => this.changeTheme(e.target.value));
+                document.getElementById('languageSelector').addEventListener('change', (e) => this.changeLanguage(e.target.value));
+            }
+
+            async generatePeaceName() {
+                try {
+                    const response = await fetch("https://api.anthropic.com/v1/messages", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            model: "claude-sonnet-4-20250514",
+                            max_tokens: 150,
+                            messages: [{
+                                role: "user",
+                                content: `Generate a unique, meaningful peace-themed name for someone starting their journey as a peaceful civilian. The name should be inspiring, multicultural-friendly, and embody hope and restoration. Respond with ONLY the name, nothing else. Make it 2-4 words maximum. Examples: "Aurora Peaceweaver", "River of Unity", "Dawn Harmonykeeper"`
+                            }]
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    this.peaceName = data.content[0].text.trim();
+                } catch (error) {
+                    console.error('Error generating peace name:', error);
+                    this.peaceName = 'Peace Guardian ' + Math.floor(Math.random() * 1000);
+                }
+                
+                await this.dbManager.save('settings', { key: 'peaceName', value: this.peaceName });
+                document.getElementById('peaceName').textContent = this.peaceName;
+            }
+
+            async loadFolder() {
+                try {
+                    if (!('showDirectoryPicker' in window)) {
+                        alert('Your browser doesn\'t support the File System Access API. Please use Chrome, Edge, or another Chromium-based browser.');
+                        return;
+                    }
+
+                    const dirHandle = await window.showDirectoryPicker();
+                    this.files = [];
+                    this.fileHandles.clear();
+                    
+                    await this.scanDirectory(dirHandle);
+                    await this.displayFiles();
+                    this.addPeacePoints(this.filesScanned * 10);
+                    this.updateHUD();
+                    this.checkLevelUp();
+                    
+                } catch (error) {
+                    if (error.name !== 'AbortError') {
+                        console.error('Error loading folder:', error);
+                    }
+                }
+            }
+
+            async scanDirectory(dirHandle, path = '') {
+                for await (const entry of dirHandle.values()) {
+                    const fullPath = path ? `${path}/${entry.name}` : entry.name;
+                    
+                    if (entry.kind === 'file' && entry.name.endsWith('.html')) {
+                        const fileHandle = await dirHandle.getFileHandle(entry.name);
+                        const file = await fileHandle.getFile();
+                        
+                        const fileData = {
+                            name: entry.name,
+                            path: fullPath,
+                            size: file.size,
+                            lastModified: file.lastModified,
+                            handle: fileHandle
+                        };
+                        
+                        this.files.push(fileData);
+                        this.fileHandles.set(fullPath, fileHandle);
+                        this.filesScanned++;
+                        
+                        await this.dbManager.save('files', {
+                            ...fileData,
+                            handle: null
+                        });
+                        
+                    } else if (entry.kind === 'directory') {
+                        await this.scanDirectory(entry, fullPath);
+                    }
+                }
+            }
+
+            async displayFiles(filesToDisplay = null) {
+                const fileGrid = document.getElementById('fileGrid');
+                const files = filesToDisplay || this.files;
+                
+                if (files.length === 0) {
+                    fileGrid.innerHTML = `
+                        <div class="file-card" style="text-align: center; grid-column: 1/-1;">
+                            <div class="file-icon">🔍</div>
+                            <div class="file-name">${this.translate('No HTML files found')}</div>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                fileGrid.innerHTML = files.map(file => `
+                    <div class="file-card" onclick="app.openFile('${file.path}')">
+                        <div class="file-icon">📄</div>
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-meta">
+                            ${this.formatFileSize(file.size)} • 
+                            ${new Date(file.lastModified).toLocaleDateString()}
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            async openFile(path) {
+                const fileHandle = this.fileHandles.get(path);
+                if (fileHandle) {
+                    try {
+                        const file = await fileHandle.getFile();
+                        const url = URL.createObjectURL(file);
+                        window.open(url, '_blank');
+                        this.addPeacePoints(5);
+                    } catch (error) {
+                        console.error('Error opening file:', error);
+                    }
+                }
+            }
+
+            filterFiles(searchTerm) {
+                const filtered = this.files.filter(file => 
+                    file.name.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+                this.displayFiles(filtered);
+            }
+
+            addPeacePoints(points) {
+                this.peacePoints += points;
+                this.updateHUD();
+                this.saveStats();
+            }
+
+            checkLevelUp() {
+                const requiredPoints = this.level * 100;
+                if (this.peacePoints >= requiredPoints) {
+                    this.level++;
+                    this.peacePoints = this.peacePoints - requiredPoints;
+                    this.updateRole();
+                    this.showLevelUp();
+                    this.saveStats();
+                }
+            }
+
+            updateRole() {
+                if (this.level <= 5) this.currentRole = 'Peaceful Civilian';
+                else if (this.level <= 10) this.currentRole = 'Peace Advocate';
+                else if (this.level <= 15) this.currentRole = 'Harmony Seeker';
+                else if (this.level <= 20) this.currentRole = 'Unity Guardian';
+                else if (this.level <= 30) this.currentRole = 'Peace Architect';
+                else if (this.level <= 40) this.currentRole = 'Harmony Weaver';
+                else if (this.level <= 50) this.currentRole = 'Unity Catalyst';
+                else this.currentRole = 'Mythic Architect of Peaceful Futures';
+            }
+
+            showLevelUp() {
+                const banner = document.createElement('div');
+                banner.className = 'level-up-banner';
+                banner.innerHTML = `
+                    <h2 style="font-size: 2rem; margin-bottom: 10px;">✨ Level Up! ✨</h2>
+                    <p style="font-size: 1.5rem;">${this.currentRole}</p>
+                    <p style="margin-top: 10px;">Level ${this.level}</p>
+                `;
+                document.body.appendChild(banner);
+                setTimeout(() => banner.remove(), 2000);
+            }
+
+            updateHUD() {
+                document.getElementById('peaceRole').textContent = this.currentRole;
+                document.getElementById('hudLevel').textContent = this.level;
+                document.getElementById('hudPeacePoints').textContent = this.peacePoints;
+                document.getElementById('hudFilesScanned').textContent = this.filesScanned;
+                document.getElementById('hudPeacefulActions').textContent = this.peacefulActions;
+                
+                const progress = (this.peacePoints / (this.level * 100)) * 100;
+                document.getElementById('progressFill').style.width = `${Math.min(progress, 100)}%`;
+            }
+
+            async loadStats() {
+                this.level = await this.dbManager.get('stats', 'level') || 1;
+                this.peacePoints = await this.dbManager.get('stats', 'peacePoints') || 0;
+                this.filesScanned = await this.dbManager.get('stats', 'filesScanned') || 0;
+                this.peacefulActions = await this.dbManager.get('stats', 'peacefulActions') || 0;
+                this.peaceName = await this.dbManager.get('settings', 'peaceName') || '';
+                this.updateRole();
+            }
+
+            async saveStats() {
+                await this.dbManager.save('stats', { key: 'level', value: this.level });
+                await this.dbManager.save('stats', { key: 'peacePoints', value: this.peacePoints });
+                await this.dbManager.save('stats', { key: 'filesScanned', value: this.filesScanned });
+                await this.dbManager.save('stats', { key: 'peacefulActions', value: this.peacefulActions });
+            }
+
+            changeTheme(theme) {
+                document.body.setAttribute('data-theme', theme);
+                this.dbManager.save('settings', { key: 'theme', value: theme });
+            }
+
+            changeLanguage(lang) {
+                this.currentLanguage = lang;
+                this.applyTranslations();
+                this.dbManager.save('settings', { key: 'language', value: lang });
+            }
+
+            translate(key) {
+                return translations[this.currentLanguage]?.[key] || translations.en[key] || key;
+            }
+
+            applyTranslations() {
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    el.textContent = this.translate(key);
+                });
+                
+                document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                    const key = el.getAttribute('data-i18n-placeholder');
+                    el.placeholder = this.translate(key);
+                });
+            }
+
+            formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i];
+            }
+        }
+
+        /* ========================================
+           PEACEFUL ACTIONS
+        ======================================== */
+        function takePeaceAction(actionType) {
+            app.currentAction = actionType;
+            
+            const actions = {
+                plant: {
+                    title: '🌳 Plant a Tree',
+                    body: `
+                        <p style="margin-bottom: 15px;">Commit to planting or funding tree restoration. Trees are vital for planetary healing.</p>
+                        <p style="color: var(--text-secondary);">Ways to participate:</p>
+                        <ul style="color: var(--text-secondary); margin: 10px 0; padding-left: 20px;">
+                            <li>Plant trees locally</li>
+                            <li>Support reforestation organizations</li>
+                            <li>Partner with migration programs for tree planting initiatives</li>
+                            <li>Document and share your planting journey</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Peace Points:</strong> +50</p>
+                    `,
+                    points: 50
+                },
+                share: {
+                    title: '📚 Share Knowledge',
+                    body: `
+                        <p style="margin-bottom: 15px;">Share peaceful wisdom, resources, and knowledge with your community.</p>
+                        <p style="color: var(--text-secondary);">Actions you can take:</p>
+                        <ul style="color: var(--text-secondary); margin: 10px 0; padding-left: 20px;">
+                            <li>Share educational resources</li>
+                            <li>Translate peace-building content</li>
+                            <li>Mentor others in peaceful practices</li>
+                            <li>Create and distribute helpful content</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Peace Points:</strong> +30</p>
+                    `,
+                    points: 30
+                },
+                mediate: {
+                    title: '🤝 Mediate Conflict',
+                    body: `
+                        <p style="margin-bottom: 15px;">Help resolve disputes peacefully in your community.</p>
+                        <p style="color: var(--text-secondary);">Peace-building activities:</p>
+                        <ul style="color: var(--text-secondary); margin: 10px 0; padding-left: 20px;">
+                            <li>Facilitate dialogue between parties</li>
+                            <li>Practice and teach nonviolent communication</li>
+                            <li>Create safe spaces for conflict resolution</li>
+                            <li>Bridge divides with compassion</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Peace Points:</strong> +75</p>
+                    `,
+                    points: 75
+                },
+                educate: {
+                    title: '🎓 Educate Others',
+                    body: `
+                        <p style="margin-bottom: 15px;">Teach peace-building practices and principles.</p>
+                        <p style="margin-top: 15px;"><strong>Peace Points:</strong> +40</p>
+                    `,
+                    points: 40
+                },
+                volunteer: {
+                    title: '💚 Volunteer',
+                    body: `
+                        <p style="margin-bottom: 15px;">Offer your time and skills to peaceful causes.</p>
+                        <p style="margin-top: 15px;"><strong>Peace Points:</strong> +60</p>
+                    `,
+                    points: 60
+                },
+                donate: {
+                    title: '🎁 Support Peace',
+                    body: `
+                        <p style="margin-bottom: 15px;">Contribute resources to peace organizations and initiatives.</p>
+                        <p style="margin-top: 15px;"><strong>Peace Points:</strong> +35</p>
+                    `,
+                    points: 35
+                }
+            };
+            
+            const action = actions[actionType];
+            document.getElementById('modalTitle').innerHTML = action.title;
+            document.getElementById('modalBody').innerHTML = action.body;
+            document.getElementById('actionModal').classList.add('active');
+        }
+
+        function confirmAction() {
+            if (app.currentAction) {
+                const points = {
+                    plant: 50,
+                    share: 30,
+                    mediate: 75,
+                    educate: 40,
+                    volunteer: 60,
+                    donate: 35
+                }[app.currentAction];
+                
+                app.addPeacePoints(points);
+                app.peacefulActions++;
+                app.checkLevelUp();
+                app.saveStats();
+                
+                const achievement = document.createElement('div');
+                achievement.className = 'achievement';
+                achievement.textContent = `✅ Peaceful action completed! +${points} points`;
+                document.getElementById('achievementList').appendChild(achievement);
+                
+                setTimeout(() => {
+                    achievement.style.opacity = '0';
+                    setTimeout(() => achievement.remove(), 500);
+                }, 3000);
+                
+                closeModal('actionModal');
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function toggleCollapsible(header) {
+            header.parentElement.classList.toggle('open');
+        }
+
+        async function exportAsHTML() {
+            const html = document.documentElement.outerHTML;
+            const blob = new Blob([html], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'peace-constellation-export.html';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        async function exportAsJSON() {
+            const data = {
+                peaceName: app.peaceName,
+                level: app.level,
+                role: app.currentRole,
+                peacePoints: app.peacePoints,
+                filesScanned: app.filesScanned,
+                peacefulActions: app.peacefulActions,
+                exportDate: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'peace-journey-data.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        /* ========================================
+           INITIALIZATION
+        ======================================== */
+        let app;
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            app = new PeaceNavigator();
+            await app.init();
+        });
+    </script>
+
+    <!--
+        ========================================
+        ZERO-HARM & PEACE COMMITMENT
+        ========================================
+        This platform celebrates peace, unity, and planetary restoration.
+        All actions are voluntary. All data is local.
+        Built for humanity's benefit, not extraction.
+        
+        May all beings be peaceful. May all beings be happy.
+        May all beings be free from suffering. ❤️
+        ========================================
+    -->
+</body>
+</html>
